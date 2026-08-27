@@ -23,6 +23,8 @@ import org.openide.util.Lookup;
 import org.openide.util.lookup.Lookups;
 import org.openide.nodes.Node;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
+import org.netbeans.spi.project.ui.CustomizerProvider;
 import org.netbeans.spi.project.ui.LogicalViewProvider;
 import org.openide.util.lookup.ProxyLookup;
 import org.netbeans.spi.project.ui.support.CommonProjectActions;
@@ -56,7 +58,9 @@ public class CustomerProject implements Project {
             lkp = Lookups.fixed(new Object[]{
                 this,
                 new Info(),
-                new CustomerProjectLogicalView(this),});
+                new CustomerProjectLogicalView(this),
+                new CustomerCustomizerProvider(this),
+                });
         }
         return lkp;
     }
@@ -109,7 +113,7 @@ public class CustomerProject implements Project {
             this.project = project;
         }
 
-       @Override
+        @Override
         public Node createLogicalView() {
             try {
                 //Obtain the project directory's node:
@@ -137,8 +141,7 @@ public class CustomerProject implements Project {
 
             public ProjectNode(Node node, CustomerProject project)
                     throws DataObjectNotFoundException {
-                super(node, NodeFactorySupport.createCompositeChildren(project, "Project/com-ceos-customerprojecttype/Nodes"),
-                        
+                super(node, NodeFactorySupport.createCompositeChildren(project, "Projects/com-ceos-customerprojecttype/Nodes"),
                         new ProxyLookup(
                                 new Lookup[]{
                                     Lookups.singleton(project),
@@ -153,6 +156,7 @@ public class CustomerProject implements Project {
                     CommonProjectActions.newFileAction(),
                     CommonProjectActions.copyProjectAction(),
                     CommonProjectActions.deleteProjectAction(),
+                    CommonProjectActions.customizeProjectAction(),
                     CommonProjectActions.closeProjectAction()
                 };
             }
