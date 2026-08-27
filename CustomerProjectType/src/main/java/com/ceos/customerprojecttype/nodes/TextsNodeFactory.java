@@ -39,7 +39,7 @@ public class TextsNodeFactory implements  NodeFactory {
         @Override
         public List<Node> keys() {
             FileObject textsFolder =
-                project.getProjectDirectory().getFileObject("text");
+                project.getProjectDirectory().getFileObject("texts");
             List<Node> result = new ArrayList<Node>();
             if (textsFolder != null) {
                 for (FileObject textsFolderFile : textsFolder.getChildren()) {

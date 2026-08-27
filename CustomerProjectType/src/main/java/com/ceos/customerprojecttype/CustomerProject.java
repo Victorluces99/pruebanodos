@@ -23,6 +23,7 @@ import org.openide.util.Lookup;
 import org.openide.util.lookup.Lookups;
 import org.openide.nodes.Node;
 import javax.swing.Action;
+import org.netbeans.spi.project.ui.LogicalViewProvider;
 import org.openide.util.lookup.ProxyLookup;
 import org.netbeans.spi.project.ui.support.CommonProjectActions;
 import org.netbeans.spi.project.ui.support.NodeFactory;
@@ -100,7 +101,7 @@ public class CustomerProject implements Project {
     class CustomerProjectLogicalView implements LogicalViewProvider {
 
         @StaticResource()
-        public static final String CUSTOMER_ICON1 = "com/ceos/customerprojecttype/icon.png";
+        public static final String CUSTOMER_ICON = "com/ceos/customerprojecttype/icon.png";
 
         private final CustomerProject project;
 
@@ -108,7 +109,7 @@ public class CustomerProject implements Project {
             this.project = project;
         }
 
-//        @Override
+       @Override
         public Node createLogicalView() {
             try {
                 //Obtain the project directory's node:
@@ -123,6 +124,11 @@ public class CustomerProject implements Project {
                 //read-only filesystem or something evil happened
                 return new AbstractNode(Children.LEAF);
             }
+        }
+
+        @Override
+        public Node findPath(Node root, Object target) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
 
         private final class ProjectNode extends FilterNode {
@@ -153,7 +159,7 @@ public class CustomerProject implements Project {
 
             @Override
             public Image getIcon(int type) {
-                return ImageUtilities.loadImage(CUSTOMER_ICON1);
+                return ImageUtilities.loadImage(CUSTOMER_ICON);
             }
 
             @Override
