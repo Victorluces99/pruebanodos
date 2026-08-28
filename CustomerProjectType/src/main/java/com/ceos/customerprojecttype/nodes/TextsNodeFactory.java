@@ -5,9 +5,11 @@
 package com.ceos.customerprojecttype.nodes;
 
 import com.ceos.customerprojecttype.CustomerProject;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.ChangeListener;
+import org.netbeans.api.annotations.common.StaticResource;
 import org.netbeans.api.project.Project;
 import org.netbeans.spi.project.ui.support.NodeFactory;
 import org.netbeans.spi.project.ui.support.NodeList;
@@ -17,9 +19,13 @@ import org.openide.loaders.DataObjectNotFoundException;
 import org.openide.nodes.FilterNode;
 import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
+import org.openide.util.ImageUtilities;
 
 @NodeFactory.Registration(projectType = "com-ceos-customerprojecttype", position = 10)
-public class TextsNodeFactory implements  NodeFactory {
+public class TextsNodeFactory implements NodeFactory {
+
+    @StaticResource()
+    public static final String XML_ICON = "com/ceos/customerprojecttype/xml_icon.png";
 
     @Override
     public NodeList<?> createNodes(Project project) {
@@ -38,8 +44,8 @@ public class TextsNodeFactory implements  NodeFactory {
 
         @Override
         public List<Node> keys() {
-            FileObject textsFolder =
-                project.getProjectDirectory().getFileObject("texts");
+            FileObject textsFolder
+                    = project.getProjectDirectory().getFileObject("texts");
             List<Node> result = new ArrayList<Node>();
             if (textsFolder != null) {
                 for (FileObject textsFolderFile : textsFolder.getChildren()) {
@@ -55,7 +61,17 @@ public class TextsNodeFactory implements  NodeFactory {
 
         @Override
         public Node node(Node node) {
-            return new FilterNode(node);
+            return new FilterNode(node) {
+                @Override
+                public Image getIcon(int type) {
+                    return ImageUtilities.loadImage(XML_ICON);
+                }
+
+                @Override
+                public Image getOpenedIcon(int type) {
+                    return ImageUtilities.loadImage(XML_ICON);
+                }
+            };
         }
 
         @Override

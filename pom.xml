@@ -21,6 +21,7 @@
         <module>branding</module>
         <module>application</module>
         <module>CustomerProjectType</module>
+        <module>CustomType</module>
     </modules>
 
     <build>

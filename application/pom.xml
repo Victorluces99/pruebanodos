@@ -74,6 +74,11 @@
             <artifactId>org-netbeans-modules-projectui</artifactId>
             <version>${netbeans.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CustomType</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
