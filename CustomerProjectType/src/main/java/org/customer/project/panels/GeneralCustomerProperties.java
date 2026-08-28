@@ -11,8 +11,7 @@ import org.netbeans.spi.project.ui.support.ProjectCustomizer.Category;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
 
-public class GeneralCustomerProperties
-    implements  ProjectCustomizer.CompositeCategoryProvider {
+public class GeneralCustomerProperties implements ProjectCustomizer.CompositeCategoryProvider {
 
     private static final String GENERAL = "General";
 
